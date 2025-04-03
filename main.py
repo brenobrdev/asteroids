@@ -17,10 +17,12 @@ def main():
             if event.type == pygame.QUIT:
                 return
         
+        dt = clock.tick(constants.GAME_FPS)/1000
+
         screen.fill(pygame.Color("black"))
         player.draw(screen)
+        player.update(dt)
         pygame.display.flip()
-        dt = clock.tick(constants.GAME_FPS)/1000
 
 if __name__ == "__main__":
     main()
