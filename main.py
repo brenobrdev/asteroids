@@ -38,7 +38,6 @@ def main():
         updatables.update(dt)
 
         for asteroid in asteroids:
-            print(isinstance(asteroid, CircleShape))
             if asteroid.collides_with(player):
                 print("Game Over!")
                 sys.exit()
