@@ -2,6 +2,7 @@ import pygame
 import constants
 from player import Player
 from asteroid import Asteroid
+from asteroidfield import AsteroidField
 
 def main():
     pygame.init()
@@ -13,13 +14,17 @@ def main():
     updatables = pygame.sprite.Group()
     drawables = pygame.sprite.Group()
 
+    AsteroidField.containers = (updatables)
     Asteroid.containers = (asteroids, updatables, drawables)
     Player.containers = (updatables, drawables)
-    ast = Asteroid(constants.SCREEN_WIDTH/2, constants.SCREEN_HEIGHT/2, 20)
-    player = Player(constants.SCREEN_WIDTH/2, constants.SCREEN_HEIGHT/2)
 
-    # for implementation test only:
-    ast.velocity = pygame.Vector2(17, 17)
+    # These are not used directly;
+    # References to them are contained in the appropriate groups above 
+    # and the lifecycle methods are called accordingly in the game loop
+    # below.
+    # Asteroid spawning is managed by AsteroidField.
+    player = Player(constants.SCREEN_WIDTH/2, constants.SCREEN_HEIGHT/2)
+    asteroid_field = AsteroidField()
 
     while True:
         for event in pygame.event.get():
