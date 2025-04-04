@@ -1,8 +1,10 @@
+import sys
 import pygame
 import constants
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from circleshape import CircleShape
 
 def main():
     pygame.init()
@@ -33,9 +35,15 @@ def main():
         
         dt = clock.tick(constants.GAME_FPS)/1000
 
-        screen.fill(pygame.Color("black"))
-
         updatables.update(dt)
+
+        for asteroid in asteroids:
+            print(isinstance(asteroid, CircleShape))
+            if asteroid.collides_with(player):
+                print("Game Over!")
+                sys.exit()
+
+        screen.fill(pygame.Color("black"))
 
         for obj in drawables:
             obj.draw(screen)
